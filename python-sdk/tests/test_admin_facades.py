@@ -5,9 +5,18 @@ from openspg_py.builder import BuilderFacade
 from openspg_py.concept_instance import ConceptInstanceFacade
 from openspg_py.datasource import DataSourceFacade
 from openspg_py.models import (
+    BuilderJobQueryRequest,
     ConceptInstanceQueryRequest,
     ConceptLevelInstanceRequest,
+    DataSourceQueryRequest,
+    DataSourceRequest,
     KagBuilderRequest,
+    RetrievalQueryRequest,
+    RetrievalRequest,
+    SchedulerInstanceQueryRequest,
+    SchedulerJobQueryRequest,
+    SchedulerJobRequest,
+    SchedulerTaskQueryRequest,
     SearchEngineIndexRequest,
 )
 from openspg_py.retrieval import RetrievalFacade
@@ -47,19 +56,24 @@ def test_data_source_and_retrieval_facades():
     data_source = DataSourceFacade(t)
     retrieval = RetrievalFacade(t)
 
-    data_source.insert({"dbName": "db1", "dbUrl": "jdbc://x"})
+    data_source.insert(DataSourceRequest(db_name="db1", db_url="jdbc://x"))
     data_source.get_all_table(10, "db1", keyword="user")
     data_source.get_table_detail(10, "db1", "orders")
     data_source.get_data_source_type("MYSQL")
     retrieval.get_all()
     retrieval.get_by_project_id(8)
-    retrieval.search({"projectId": 8, "keyword": "ret"})
+    data_source.search(DataSourceQueryRequest(page_no=1, page_size=10, db_name="db1"))
+    retrieval.search(RetrievalQueryRequest(page_no=1, page_size=10, keyword="ret"))
+    retrieval.update(RetrievalRequest(id=1, name="r1", type="DEFAULT"))
 
     assert t.calls[0]["path"] == "/public/v1/datasource/insert"
     assert t.calls[1]["params"]["dbName"] == "db1"
     assert t.calls[2]["params"]["tableName"] == "orders"
     assert t.calls[4]["path"] == "/public/v1/retrieval/getAll"
     assert t.calls[5]["params"]["projectId"] == 8
+    assert t.calls[6]["json"]["dbName"] == "db1"
+    assert t.calls[7]["json"]["keyword"] == "ret"
+    assert t.calls[8]["json"]["id"] == 1
 
 
 def test_search_engine_and_builder_facades():
@@ -71,7 +85,7 @@ def test_search_engine_and_builder_facades():
     builder.kag_submit(
         KagBuilderRequest(project_id=1, command="python run.py", worker_num=2, user_number="u001")
     )
-    builder.search({"projectId": 1, "pageNo": 1, "pageSize": 10})
+    builder.search(BuilderJobQueryRequest(project_id=1, page_no=1, page_size=10))
 
     assert t.calls[0]["path"] == "/public/v1/searchEngine/index"
     assert t.calls[0]["params"]["spgType"] == "Person"
@@ -84,21 +98,21 @@ def test_scheduler_facade():
     t = TransportSpy()
     scheduler = SchedulerFacade(t)
 
-    scheduler.submit_job({"projectId": 1, "name": "job1"})
+    scheduler.submit_job(SchedulerJobRequest(project_id=1, name="job1"))
     scheduler.execute_job(10)
     scheduler.enable_job(10)
     scheduler.disable_job(10)
     scheduler.delete_job(10)
-    scheduler.update_job({"id": 10, "projectId": 1, "name": "job1-updated"})
+    scheduler.update_job(SchedulerJobRequest(id=10, project_id=1, name="job1-updated"))
     scheduler.get_job_by_id(10)
-    scheduler.search_jobs({"projectId": 1, "pageNo": 1, "pageSize": 10})
+    scheduler.search_jobs(SchedulerJobQueryRequest(project_id=1, page_no=1, page_size=10))
     scheduler.get_instance_by_id(20)
     scheduler.stop_instance(20)
     scheduler.set_finish_instance(20)
     scheduler.restart_instance(20)
     scheduler.trigger_instance(20)
-    scheduler.search_instances({"jobId": 10})
-    scheduler.search_tasks({"instanceId": 20})
+    scheduler.search_instances(SchedulerInstanceQueryRequest(job_id=10))
+    scheduler.search_tasks(SchedulerTaskQueryRequest(instance_id=20))
     scheduler.set_ip("127.0.0.1")
 
     assert t.calls[0]["path"] == "/public/v1/scheduler/job/submit"

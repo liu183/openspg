@@ -1,27 +1,40 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from ._http import OpenSPGHttpTransport
 from .api import ApiResponse
+from .models import DataSourceQueryRequest, DataSourceRequest
+
+
+def _to_body(payload: Union[Dict[str, Any], Any]) -> Dict[str, Any]:
+    if isinstance(payload, dict):
+        return payload
+    if hasattr(payload, "to_body"):
+        return payload.to_body()
+    raise TypeError("payload must be dict or model with to_body()")
 
 
 class DataSourceFacade:
     def __init__(self, transport: OpenSPGHttpTransport) -> None:
         self._transport = transport
 
-    def insert(self, payload: Dict[str, Any]) -> ApiResponse[Dict[str, Any]]:
+    def insert(
+        self, payload: Union[Dict[str, Any], DataSourceRequest]
+    ) -> ApiResponse[Dict[str, Any]]:
         return self._transport.request(
             "POST",
             "/public/v1/datasource/insert",
-            json=payload,
+            json=_to_body(payload),
         )
 
-    def update(self, payload: Dict[str, Any]) -> ApiResponse[Dict[str, Any]]:
+    def update(
+        self, payload: Union[Dict[str, Any], DataSourceRequest]
+    ) -> ApiResponse[Dict[str, Any]]:
         return self._transport.request(
             "POST",
             "/public/v1/datasource/update",
-            json=payload,
+            json=_to_body(payload),
         )
 
     def delete(self, data_source_id: int) -> ApiResponse[Dict[str, Any]]:
@@ -38,11 +51,13 @@ class DataSourceFacade:
             params={"id": data_source_id},
         )
 
-    def search(self, payload: Dict[str, Any]) -> ApiResponse[Dict[str, Any]]:
+    def search(
+        self, payload: Union[Dict[str, Any], DataSourceQueryRequest]
+    ) -> ApiResponse[Dict[str, Any]]:
         return self._transport.request(
             "POST",
             "/public/v1/datasource/search",
-            json=payload,
+            json=_to_body(payload),
         )
 
     def get_all_database(self, data_source_id: int) -> ApiResponse[List[str]]:
@@ -73,11 +88,13 @@ class DataSourceFacade:
             params={"id": data_source_id, "dbName": db_name, "tableName": table_name},
         )
 
-    def test_connect(self, payload: Dict[str, Any]) -> ApiResponse[Dict[str, Any]]:
+    def test_connect(
+        self, payload: Union[Dict[str, Any], DataSourceRequest]
+    ) -> ApiResponse[Dict[str, Any]]:
         return self._transport.request(
             "POST",
             "/public/v1/datasource/testConnect",
-            json=payload,
+            json=_to_body(payload),
         )
 
     def get_data_source_type(
@@ -93,11 +110,10 @@ class DataSourceFacade:
         )
 
     def get_data_source_group_by_type(
-        self, payload: Dict[str, Any]
+        self, payload: Union[Dict[str, Any], DataSourceQueryRequest]
     ) -> ApiResponse[List[Dict[str, Any]]]:
         return self._transport.request(
             "POST",
             "/public/v1/datasource/getDataSourceGroupByType",
-            json=payload,
+            json=_to_body(payload),
         )
-

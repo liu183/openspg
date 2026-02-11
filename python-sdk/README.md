@@ -26,6 +26,12 @@ Current migration scope:
   - `404` -> `ApiResponse.success=True, data=None`
   - connection failure -> raise `ApiException.connect_error`
 
+Coverage status:
+
+- OpenAPI `/public/v1/*` endpoint mapping: `71/71` implemented in Python facades.
+- Strong-typed request dataclasses are provided for schema/concept/project/search/graph and
+  core admin queries (datasource/retrieval/builder/scheduler), with backward-compatible `dict` input.
+
 ## Install
 
 ```bash

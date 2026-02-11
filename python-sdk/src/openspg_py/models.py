@@ -604,3 +604,285 @@ class KagBuilderRequest:
                 "envs": self.envs,
             }
         )
+
+
+@dataclass(frozen=True)
+class DataSourceRequest:
+    db_name: str
+    db_url: str
+    type: Optional[str] = None
+    id: Optional[int] = None
+    db_user: Optional[str] = None
+    db_password: Optional[str] = None
+    db_driver_name: Optional[str] = None
+    category: Optional[str] = None
+    encrypt: Optional[str] = None
+    create_user: Optional[str] = None
+    update_user: Optional[str] = None
+    remark: Optional[str] = None
+    status: Optional[str] = None
+    connection_info: Optional[Dict[str, Any]] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "id": self.id,
+                "type": self.type,
+                "dbName": self.db_name,
+                "dbUrl": self.db_url,
+                "dbUser": self.db_user,
+                "dbPassword": self.db_password,
+                "dbDriverName": self.db_driver_name,
+                "category": self.category,
+                "encrypt": self.encrypt,
+                "createUser": self.create_user,
+                "updateUser": self.update_user,
+                "remark": self.remark,
+                "status": self.status,
+                "connectionInfo": self.connection_info,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class DataSourceQueryRequest:
+    ids: Optional[List[int]] = None
+    page_no: Optional[int] = None
+    page_size: Optional[int] = None
+    sort: Optional[str] = None
+    order: Optional[str] = None
+    db_name: Optional[str] = None
+    type: Optional[str] = None
+    category: Optional[str] = None
+    status: Optional[str] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "ids": self.ids,
+                "pageNo": self.page_no,
+                "pageSize": self.page_size,
+                "sort": self.sort,
+                "order": self.order,
+                "dbName": self.db_name,
+                "type": self.type,
+                "category": self.category,
+                "status": self.status,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class RetrievalRequest:
+    id: Optional[int] = None
+    type: Optional[str] = None
+    status: Optional[str] = None
+    is_default: Optional[str] = None
+    name: Optional[str] = None
+    chinese_name: Optional[str] = None
+    schema_desc: Optional[str] = None
+    scenarios_desc: Optional[str] = None
+    cost_desc: Optional[str] = None
+    method_desc: Optional[str] = None
+    extractor_desc: Optional[str] = None
+    retriever_desc: Optional[str] = None
+    module_path: Optional[str] = None
+    class_name: Optional[str] = None
+    method: Optional[str] = None
+    extension: Optional[str] = None
+    config: Optional[str] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "id": self.id,
+                "type": self.type,
+                "status": self.status,
+                "isDefault": self.is_default,
+                "name": self.name,
+                "chineseName": self.chinese_name,
+                "schemaDesc": self.schema_desc,
+                "scenariosDesc": self.scenarios_desc,
+                "costDesc": self.cost_desc,
+                "methodDesc": self.method_desc,
+                "extractorDesc": self.extractor_desc,
+                "retrieverDesc": self.retriever_desc,
+                "modulePath": self.module_path,
+                "className": self.class_name,
+                "method": self.method,
+                "extension": self.extension,
+                "config": self.config,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class RetrievalQueryRequest:
+    ids: Optional[List[int]] = None
+    page_no: Optional[int] = None
+    page_size: Optional[int] = None
+    sort: Optional[str] = None
+    order: Optional[str] = None
+    keyword: Optional[str] = None
+    name: Optional[str] = None
+    type: Optional[str] = None
+    status: Optional[str] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "ids": self.ids,
+                "pageNo": self.page_no,
+                "pageSize": self.page_size,
+                "sort": self.sort,
+                "order": self.order,
+                "keyword": self.keyword,
+                "name": self.name,
+                "type": self.type,
+                "status": self.status,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class BuilderJobQueryRequest:
+    project_id: Optional[int] = None
+    ids: Optional[List[int]] = None
+    page_no: Optional[int] = None
+    page_size: Optional[int] = None
+    sort: Optional[str] = None
+    order: Optional[str] = None
+    keyword: Optional[str] = None
+    status: Optional[str] = None
+    type: Optional[str] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "projectId": self.project_id,
+                "ids": self.ids,
+                "pageNo": self.page_no,
+                "pageSize": self.page_size,
+                "sort": self.sort,
+                "order": self.order,
+                "keyword": self.keyword,
+                "status": self.status,
+                "type": self.type,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class SchedulerJobRequest:
+    project_id: int
+    name: str
+    id: Optional[int] = None
+    create_user: Optional[str] = None
+    modify_user: Optional[str] = None
+    life_cycle: Optional[str] = None
+    translate_type: Optional[str] = None
+    status: Optional[str] = None
+    dependence: Optional[str] = None
+    scheduler_cron: Optional[str] = None
+    invoker_id: Optional[str] = None
+    extension: Optional[Dict[str, Any]] = None
+    version: Optional[str] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "id": self.id,
+                "projectId": self.project_id,
+                "name": self.name,
+                "createUser": self.create_user,
+                "modifyUser": self.modify_user,
+                "lifeCycle": self.life_cycle,
+                "translateType": self.translate_type,
+                "status": self.status,
+                "dependence": self.dependence,
+                "schedulerCron": self.scheduler_cron,
+                "invokerId": self.invoker_id,
+                "extension": self.extension,
+                "version": self.version,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class SchedulerJobQueryRequest:
+    project_id: Optional[int] = None
+    ids: Optional[List[int]] = None
+    page_no: Optional[int] = None
+    page_size: Optional[int] = None
+    sort: Optional[str] = None
+    order: Optional[str] = None
+    status: Optional[str] = None
+    name: Optional[str] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "projectId": self.project_id,
+                "ids": self.ids,
+                "pageNo": self.page_no,
+                "pageSize": self.page_size,
+                "sort": self.sort,
+                "order": self.order,
+                "status": self.status,
+                "name": self.name,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class SchedulerInstanceQueryRequest:
+    project_id: Optional[int] = None
+    job_id: Optional[int] = None
+    ids: Optional[List[int]] = None
+    page_no: Optional[int] = None
+    page_size: Optional[int] = None
+    sort: Optional[str] = None
+    order: Optional[str] = None
+    status: Optional[str] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "projectId": self.project_id,
+                "jobId": self.job_id,
+                "ids": self.ids,
+                "pageNo": self.page_no,
+                "pageSize": self.page_size,
+                "sort": self.sort,
+                "order": self.order,
+                "status": self.status,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class SchedulerTaskQueryRequest:
+    project_id: Optional[int] = None
+    instance_id: Optional[int] = None
+    job_id: Optional[int] = None
+    ids: Optional[List[int]] = None
+    page_no: Optional[int] = None
+    page_size: Optional[int] = None
+    sort: Optional[str] = None
+    order: Optional[str] = None
+    status: Optional[str] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "projectId": self.project_id,
+                "instanceId": self.instance_id,
+                "jobId": self.job_id,
+                "ids": self.ids,
+                "pageNo": self.page_no,
+                "pageSize": self.page_size,
+                "sort": self.sort,
+                "order": self.order,
+                "status": self.status,
+            }
+        )

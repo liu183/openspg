@@ -63,6 +63,7 @@ This gives Python programs immediate interoperability with OpenSPG server APIs.
   - scheduler APIs under `/public/v1/scheduler/*`
   - response and error semantics aligned with Java client
   - optional schema TTL cache aligned with Java cache intent
+  - current endpoint parity (openapi): 71 Java endpoints / 71 Python endpoint mappings
 
 ## 5. Remaining migration backlog (not converted yet)
 
