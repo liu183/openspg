@@ -16,6 +16,7 @@ from .query import QueryFacade
 from .reason import ReasonFacade
 from .retrieval import RetrievalFacade
 from .sampling import SamplingFacade
+from .scheduler import SchedulerFacade
 from .schema import SchemaFacade
 from .search import SearchFacade
 from .search_engine import SearchEngineFacade
@@ -57,3 +58,4 @@ class OpenSPGClient:
         self.retrieval = RetrievalFacade(transport)
         self.search_engine = SearchEngineFacade(transport)
         self.builder = BuilderFacade(transport)
+        self.scheduler = SchedulerFacade(transport)

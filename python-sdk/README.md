@@ -15,6 +15,7 @@ Current migration scope:
   - `ConceptInstanceFacade`
   - `DataSourceFacade`, `RetrievalFacade`
   - `SearchEngineFacade`, `BuilderFacade`
+  - `SchedulerFacade`
 - Converted support classes:
   - `ConnectionInfo`
   - `ApiResponse`

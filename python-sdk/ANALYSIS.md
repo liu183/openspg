@@ -60,6 +60,7 @@ This gives Python programs immediate interoperability with OpenSPG server APIs.
   - graph APIs under `/public/v1/graph/*`
   - builder APIs under `/public/v1/builder/*`
   - sampling APIs under `/public/v1/sampling/*`
+  - scheduler APIs under `/public/v1/scheduler/*`
   - response and error semantics aligned with Java client
   - optional schema TTL cache aligned with Java cache intent
 
