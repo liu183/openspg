@@ -7,7 +7,14 @@ import requests
 from ._http import OpenSPGHttpTransport
 from .concept import ConceptFacade
 from .connection import ConnectionInfo
+from .graph import GraphFacade
+from .project import ProjectFacade
+from .query import QueryFacade
+from .reason import ReasonFacade
+from .sampling import SamplingFacade
 from .schema import SchemaFacade
+from .search import SearchFacade
+from .tenant import TenantFacade
 
 
 class OpenSPGClient:
@@ -33,4 +40,10 @@ class OpenSPGClient:
         )
         self.schema = SchemaFacade(transport, enable_cache=enable_schema_cache)
         self.concept = ConceptFacade(transport)
-
+        self.project = ProjectFacade(transport)
+        self.tenant = TenantFacade(transport)
+        self.query = QueryFacade(transport)
+        self.reason = ReasonFacade(transport)
+        self.search = SearchFacade(transport)
+        self.graph = GraphFacade(transport)
+        self.sampling = SamplingFacade(transport)

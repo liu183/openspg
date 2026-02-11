@@ -2,20 +2,50 @@ from .api import ApiException, ApiResponse
 from .client import OpenSPGClient
 from .concept import ConceptFacade
 from .connection import ConnectionInfo
+from .graph import GraphFacade
 from .models import (
     BuiltInPropertyRequest,
     ConceptRequest,
+    CustomSearchRequest,
+    DeleteEdgeRequest,
+    DeleteVertexRequest,
     DefineDynamicTaxonomyRequest,
     DefineTripleSemanticRequest,
+    EdgeRecordInstance,
+    GetPageRankScoresRequest,
+    GraphLabelRequest,
     ProjectSchemaRequest,
+    ProjectCreateRequest,
+    ProjectQueryRequest,
+    ProjectUpdateRequest,
+    ReasonerTaskRequest,
+    RelationSamplingRequest,
     RelationRequest,
     RemoveDynamicTaxonomyRequest,
     RemoveTripleSemanticRequest,
+    SPGTypeQueryRequest,
+    SPGTypeSamplingRequest,
+    SPGTypeSearchRequest,
     SPGTypeEnum,
     SPGTypeRequest,
     SchemaAlterRequest,
+    TenantCreateRequest,
+    TenantQueryRequest,
+    TextSearchRequest,
+    ThinkerTaskRequest,
+    UpsertEdgeRequest,
+    UpsertVertexRequest,
+    VectorSearchRequest,
+    VertexRecordInstance,
+    WriterGraphRequest,
 )
+from .project import ProjectFacade
+from .query import QueryFacade
+from .reason import ReasonFacade
+from .sampling import SamplingFacade
 from .schema import SchemaFacade
+from .search import SearchFacade
+from .tenant import TenantFacade
 
 __all__ = [
     "ApiException",
@@ -24,6 +54,13 @@ __all__ = [
     "ConnectionInfo",
     "SchemaFacade",
     "ConceptFacade",
+    "ProjectFacade",
+    "TenantFacade",
+    "QueryFacade",
+    "ReasonFacade",
+    "SearchFacade",
+    "GraphFacade",
+    "SamplingFacade",
     "ProjectSchemaRequest",
     "SPGTypeRequest",
     "RelationRequest",
@@ -34,6 +71,28 @@ __all__ = [
     "DefineTripleSemanticRequest",
     "RemoveDynamicTaxonomyRequest",
     "RemoveTripleSemanticRequest",
+    "ProjectCreateRequest",
+    "ProjectUpdateRequest",
+    "ProjectQueryRequest",
+    "TenantCreateRequest",
+    "TenantQueryRequest",
+    "SPGTypeQueryRequest",
+    "SPGTypeSearchRequest",
+    "TextSearchRequest",
+    "VectorSearchRequest",
+    "CustomSearchRequest",
+    "ReasonerTaskRequest",
+    "ThinkerTaskRequest",
+    "GraphLabelRequest",
+    "VertexRecordInstance",
+    "EdgeRecordInstance",
+    "GetPageRankScoresRequest",
+    "UpsertVertexRequest",
+    "UpsertEdgeRequest",
+    "DeleteVertexRequest",
+    "DeleteEdgeRequest",
+    "WriterGraphRequest",
+    "SPGTypeSamplingRequest",
+    "RelationSamplingRequest",
     "SPGTypeEnum",
 ]
-

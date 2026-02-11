@@ -8,6 +8,10 @@ Current migration scope:
 - Converted facades:
   - `HttpSchemaFacade` -> `SchemaFacade`
   - `HttpConceptFacade` -> `ConceptFacade`
+- Additional openapi facades:
+  - `ProjectFacade`, `TenantFacade`
+  - `QueryFacade`, `ReasonFacade`
+  - `SearchFacade`, `GraphFacade`, `SamplingFacade`
 - Converted support classes:
   - `ConnectionInfo`
   - `ApiResponse`
@@ -48,9 +52,27 @@ resp = client.concept.query_concept(
 print(resp.unwrap())
 ```
 
+## Example: Search and Graph
+
+```python
+from openspg_py import (
+    OpenSPGClient,
+    SPGTypeSearchRequest,
+    GraphLabelRequest,
+)
+
+client = OpenSPGClient("http://127.0.0.1:8887")
+search_resp = client.search.spg_type(
+    SPGTypeSearchRequest(project_id=1, keyword="Person")
+)
+print(search_resp.unwrap())
+
+labels_resp = client.graph.all_labels(GraphLabelRequest(project_id=1))
+print(labels_resp.unwrap())
+```
+
 ## Run tests
 
 ```bash
 pytest
 ```
-

@@ -48,6 +48,13 @@ This gives Python programs immediate interoperability with OpenSPG server APIs.
 - Coverage:
   - schema APIs under `/public/v1/schema/*`
   - concept APIs under `/public/v1/concept/*`
+  - project APIs under `/public/v1/project/*`
+  - tenant APIs under `/public/v1/tenant/*`
+  - query APIs under `/public/v1/query/*`
+  - reason APIs under `/public/v1/reason/*`
+  - search APIs under `/public/v1/search/*`
+  - graph APIs under `/public/v1/graph/*`
+  - sampling APIs under `/public/v1/sampling/*`
   - response and error semantics aligned with Java client
   - optional schema TTL cache aligned with Java cache intent
 
@@ -57,4 +64,3 @@ This gives Python programs immediate interoperability with OpenSPG server APIs.
 - builder execution engine and pipeline runtime
 - reasoner internals and KGDSL execution stack
 - cloudext provider implementations (Neo4j, TuGraph, Redis, Elasticsearch, etc.)
-
