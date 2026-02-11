@@ -50,10 +50,15 @@ This gives Python programs immediate interoperability with OpenSPG server APIs.
   - concept APIs under `/public/v1/concept/*`
   - project APIs under `/public/v1/project/*`
   - tenant APIs under `/public/v1/tenant/*`
+  - concept instance APIs under `/public/v1/conceptInstance/*`
+  - datasource APIs under `/public/v1/datasource/*`
+  - retrieval APIs under `/public/v1/retrieval/*`
   - query APIs under `/public/v1/query/*`
   - reason APIs under `/public/v1/reason/*`
   - search APIs under `/public/v1/search/*`
+  - search engine APIs under `/public/v1/searchEngine/*`
   - graph APIs under `/public/v1/graph/*`
+  - builder APIs under `/public/v1/builder/*`
   - sampling APIs under `/public/v1/sampling/*`
   - response and error semantics aligned with Java client
   - optional schema TTL cache aligned with Java cache intent

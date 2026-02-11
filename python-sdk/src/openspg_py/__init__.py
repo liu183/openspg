@@ -1,10 +1,15 @@
 from .api import ApiException, ApiResponse
+from .builder import BuilderFacade
 from .client import OpenSPGClient
 from .concept import ConceptFacade
+from .concept_instance import ConceptInstanceFacade
 from .connection import ConnectionInfo
+from .datasource import DataSourceFacade
 from .graph import GraphFacade
 from .models import (
     BuiltInPropertyRequest,
+    ConceptInstanceQueryRequest,
+    ConceptLevelInstanceRequest,
     ConceptRequest,
     CustomSearchRequest,
     DeleteEdgeRequest,
@@ -14,6 +19,7 @@ from .models import (
     EdgeRecordInstance,
     GetPageRankScoresRequest,
     GraphLabelRequest,
+    KagBuilderRequest,
     ProjectSchemaRequest,
     ProjectCreateRequest,
     ProjectQueryRequest,
@@ -29,6 +35,7 @@ from .models import (
     SPGTypeEnum,
     SPGTypeRequest,
     SchemaAlterRequest,
+    SearchEngineIndexRequest,
     TenantCreateRequest,
     TenantQueryRequest,
     TextSearchRequest,
@@ -42,9 +49,11 @@ from .models import (
 from .project import ProjectFacade
 from .query import QueryFacade
 from .reason import ReasonFacade
+from .retrieval import RetrievalFacade
 from .sampling import SamplingFacade
 from .schema import SchemaFacade
 from .search import SearchFacade
+from .search_engine import SearchEngineFacade
 from .tenant import TenantFacade
 
 __all__ = [
@@ -52,8 +61,11 @@ __all__ = [
     "ApiResponse",
     "OpenSPGClient",
     "ConnectionInfo",
+    "BuilderFacade",
     "SchemaFacade",
     "ConceptFacade",
+    "ConceptInstanceFacade",
+    "DataSourceFacade",
     "ProjectFacade",
     "TenantFacade",
     "QueryFacade",
@@ -61,6 +73,8 @@ __all__ = [
     "SearchFacade",
     "GraphFacade",
     "SamplingFacade",
+    "RetrievalFacade",
+    "SearchEngineFacade",
     "ProjectSchemaRequest",
     "SPGTypeRequest",
     "RelationRequest",
@@ -71,6 +85,8 @@ __all__ = [
     "DefineTripleSemanticRequest",
     "RemoveDynamicTaxonomyRequest",
     "RemoveTripleSemanticRequest",
+    "ConceptLevelInstanceRequest",
+    "ConceptInstanceQueryRequest",
     "ProjectCreateRequest",
     "ProjectUpdateRequest",
     "ProjectQueryRequest",
@@ -94,5 +110,7 @@ __all__ = [
     "WriterGraphRequest",
     "SPGTypeSamplingRequest",
     "RelationSamplingRequest",
+    "SearchEngineIndexRequest",
+    "KagBuilderRequest",
     "SPGTypeEnum",
 ]

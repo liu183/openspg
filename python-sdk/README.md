@@ -12,6 +12,9 @@ Current migration scope:
   - `ProjectFacade`, `TenantFacade`
   - `QueryFacade`, `ReasonFacade`
   - `SearchFacade`, `GraphFacade`, `SamplingFacade`
+  - `ConceptInstanceFacade`
+  - `DataSourceFacade`, `RetrievalFacade`
+  - `SearchEngineFacade`, `BuilderFacade`
 - Converted support classes:
   - `ConnectionInfo`
   - `ApiResponse`

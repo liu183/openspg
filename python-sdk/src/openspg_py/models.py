@@ -529,3 +529,78 @@ class RelationSamplingRequest:
                 "limit": self.limit,
             }
         )
+
+
+@dataclass(frozen=True)
+class ConceptLevelInstanceRequest:
+    concept_type: str
+    project_id: Optional[int] = None
+    root_concept_instance: Optional[str] = None
+
+    def to_query(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "projectId": self.project_id,
+                "conceptType": self.concept_type,
+                "rootConceptInstance": self.root_concept_instance,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class ConceptInstanceQueryRequest:
+    concept_type: str
+    concept_instance_ids: Iterable[str]
+    project_id: Optional[int] = None
+
+    def to_query(self) -> Dict[str, Any]:
+        ids = _csv(self.concept_instance_ids)
+        return _strip_none(
+            {
+                "projectId": self.project_id,
+                "conceptType": self.concept_type,
+                "conceptInstanceIds": ids,
+            }
+        )
+
+
+@dataclass(frozen=True)
+class SearchEngineIndexRequest:
+    spg_type: str
+
+    def to_query(self) -> Dict[str, Any]:
+        return {"spgType": self.spg_type}
+
+
+@dataclass(frozen=True)
+class KagBuilderRequest:
+    project_id: int
+    command: str
+    worker_num: int
+    user_number: Optional[str] = None
+    image: Optional[str] = None
+    worker_pool: Optional[str] = None
+    worker_cpu: Optional[float] = None
+    worker_gpu: Optional[int] = None
+    worker_gpu_type: Optional[str] = None
+    worker_memory: Optional[int] = None
+    worker_storage: Optional[int] = None
+    envs: Optional[Dict[str, str]] = None
+
+    def to_body(self) -> Dict[str, Any]:
+        return _strip_none(
+            {
+                "projectId": self.project_id,
+                "userNumber": self.user_number,
+                "command": self.command,
+                "image": self.image,
+                "workerPool": self.worker_pool,
+                "workerNum": self.worker_num,
+                "workerCpu": self.worker_cpu,
+                "workerGpu": self.worker_gpu,
+                "workerGpuType": self.worker_gpu_type,
+                "workerMemory": self.worker_memory,
+                "workerStorage": self.worker_storage,
+                "envs": self.envs,
+            }
+        )
